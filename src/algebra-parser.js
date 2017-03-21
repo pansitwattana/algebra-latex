@@ -97,7 +97,6 @@ const parseFrac = (firstGroup, secondGroup) => {
  * @return {Expression}                  The new expression
  */
 const parseNumber = (exp, value, nextOperator) => {
-
   if (nextOperator == null) {
     logger.debug('- Next operator not set, setting it to *')
     nextOperator = '*'
