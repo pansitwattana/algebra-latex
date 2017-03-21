@@ -1,11 +1,13 @@
 {
   "name": "algebra-latex",
-  "version": "0.3.6",
+  "version": "0.4.1",
   "scripts": {
-    "build": "./node_modules/.bin/babel src -d lib",
+    "build": "babel src -d lib",
     "start": "node .",
-    "test": "mocha --compilers js:babel-core/register",
+    "lint": "eslint ./src",
+    "test": "npm run mocha && npm run lint",
     "test-watch": "mocha --compilers js:babel-core/register watch",
+    "mocha": "mocha --compilers js:babel-core/register",
     "prepublish": "npm run build"
   },
   "description": "Parse Latex math to a regular math string or algebra.js",
@@ -14,15 +16,15 @@
   "author": "viktorstrate <viktorstrate@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "algebra.js": "^0.2.6",
+    "algebrite": "^1.0.2",
     "babel-cli": "^6.22.2",
     "babel-preset-env": "^1.1.8",
+    "coffeequate": "^1.3.0",
     "eslint": "^3.15.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.1",
     "eslint-plugin-standard": "^2.0.1",
     "mocha": "^3.2.0"
-  },
-  "dependencies": {
-    "algebra.js": "^0.2.6"
   }
 }
