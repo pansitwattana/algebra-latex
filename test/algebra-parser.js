@@ -53,7 +53,7 @@ describe('algebra parser', () => {
       }
     ]
 
-    let expected = new Expression(new Fraction(2, 4))
+    let expected = new Expression(0).add(new Fraction(2, 4))
     assert.equal(parser(parsedLatex).toString(), expected.toString())
   })
 })
