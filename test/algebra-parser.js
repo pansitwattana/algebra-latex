@@ -56,4 +56,47 @@ describe('algebra parser', () => {
     let expected = new Expression(0).add(new Fraction(2, 4))
     assert.equal(parser(parsedLatex).toString(), expected.toString())
   })
+
+  it('should parse a simple equation with groups', () => {
+    const parsedLatex = [
+      {
+        type: 'number',
+        value: '23'
+      }, {
+        type: 'operator',
+        value: '*'
+      }, {
+        type: 'group',
+        value: [
+          {
+            type: 'number',
+            value: '10'
+          }, {
+            type: 'operator',
+            value: '+'
+          }, {
+            type: 'number',
+            value: '5'
+          }
+        ]
+      }, {
+        type: 'operator',
+        value: '-'
+      }, {
+        type: 'variable',
+        value: 'x'
+      }, {
+        type: 'operator',
+        value: '='
+      }, {
+        type: 'number',
+        value: '34'
+      }
+    ]
+
+    let firstExp = new Expression(23).multiply(new Expression(10).add(5)).subtract('x')
+    let expected = new Equation(firstExp, 34)
+
+    assert.deepEqual(parser(parsedLatex), expected)
+  })
 })

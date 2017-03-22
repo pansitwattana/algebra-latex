@@ -36,6 +36,12 @@ const algebraParser = (parsedLatex) => {
         exp = parsedObj.exp
         if (parsedObj.i) i = parsedObj.i
         break
+      case 'group':
+        const parsedGroup = algebraParser(value)
+        if (parsedGroup instanceof Error) return parsedGroup
+        if (parsedGroup instanceof Equation) return new Error('Group cannot be of type equation')
+        exp = operatorCombine(exp, parsedGroup, nextOperator)
+        break
       case 'operator':
         nextOperator = parseNextOperator(value)
         // Check for equalsign, if found reconstructure to equation from expression
