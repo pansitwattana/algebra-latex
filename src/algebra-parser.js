@@ -191,68 +191,6 @@ const parseToken = (exp, nextOperator, value, parsedLatex, i) => {
   }
 }
 
-/*
-  const parseStart = (parsedLatex) => {
-  const type = parsedLatex[0].type
-  const value = parsedLatex[0].value
-
-  logger.debug('- Parsing start of latex: ' + type + ', ' + value)
-  let exp = null
-  switch (type) {
-    case 'variable':
-    case 'number':
-      logger.debug('- - Start is variable or number')
-      exp = new Expression(functors.numerify(value))
-      break
-    case 'token':
-      logger.debug('- - Start is token')
-      if (value === 'frac') {
-        logger.debug('- - - Token is frac')
-        if (parsedLatex[1].type !== 'group' || parsedLatex[2].type !== 'group') {
-          return new Error('Fraction must be followed by 2 groups')
-        }
-        exp = new Expression(parseFrac(parsedLatex[1].value, parsedLatex[2].value))
-        if (exp instanceof Error) { return exp }
-      } else {
-        // TODO add more tokens, for start of parsed object
-        return new Error('Can not handle token in the beginning of object: ' + value)
-      }
-      break
-    case 'group':
-      logger.debug('- - Start is group, parsing that')
-      exp = algebraParser(value)
-      break
-    case 'operator':
-      logger.debug('- - Start is operator')
-      const isReal = parsedLatex[1].type === 'variable' || parsedLatex[1].type === 'number'
-      const error = new Error('Begining must be followed by a number or a variable')
-      switch (value) {
-        case '*':
-        case '+':
-          logger.debug('- - - Operator is * or +')
-          if (isReal) {
-            exp = parseStart(parsedLatex.slice(1))
-          } else { return error }
-          break
-        case '-':
-          logger.debug('- - - Operator is -')
-          if (isReal) {
-            exp = new Expression('0').subtract(parseStart(parsedLatex.slice(1)))
-          } else { return error }
-          break
-        case '/':
-          logger.debug('- - - Operator is /')
-          if (isReal) {
-            exp = new Expression('1').divide(parseStart(parsedLatex.slice(1)))
-          } else { return error }
-          break
-      }
-  }
-
-  return exp
-}
-*/
-
 // Functors
 const functors = {
   numerify: (val) => {
