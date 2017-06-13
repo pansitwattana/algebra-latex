@@ -18,6 +18,8 @@ const formatter = (parsedLatex) => {
       formattedString += '\\' + item.value
     } else if (item.type === 'group') {
       formattedString += '{' + formatter(item.value) + '}'
+    } else if (item.type === 'variable' && i > 0) {
+      formattedString += ' ' + item.value
     } else {
       formattedString += item.value
     }
